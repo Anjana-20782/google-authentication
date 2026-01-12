@@ -1,20 +1,30 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./pages/Login";
-import AuthSuccess from "./pages/AuthSuccess";
+// import AuthSuccess from "./pages/AuthSuccess";
 import Dashboard from "./pages/Dashboard";
 import "./index.css";
-
 
 function App() {
   return (
     <Router>
       <Navbar />
       <Routes>
+        {/* Public routes */}
         <Route path="/" element={<Login />} />
-        <Route path="/auth-success" element={<AuthSuccess />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        {/* <Route path="/auth-success" element={<AuthSuccess />} /> */}
+
+        {/* Protected route */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );

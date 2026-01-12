@@ -5,18 +5,18 @@ dotenv.config();
 
 export const authenticateJWT = (req, res, next) => {
   // 1️ Read token from headers
-  const authHeader = req.headers.authorization;
+   const token = req.cookies.token;
 
-  if (!authHeader) {
-    return res.status(401).json({ message: "Authorization header missing" });
+  if (!token) {
+    return res.status(401).json({ message: "Not Authendicated" });
   }
 
   // Token format: "Bearer <token>"
-  const token = authHeader.split(" ")[1];
+  // const token = authHeader.split(" ")[1];
 
-  if (!token) {
-    return res.status(401).json({ message: "Token missing" });
-  }
+  // if (!token) {
+  //   return res.status(401).json({ message: "Token missing" });
+  // }
 
   // 2️ Verify token
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {

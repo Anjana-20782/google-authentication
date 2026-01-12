@@ -5,10 +5,18 @@ const Navbar = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/");
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   navigate("/");
+  // };
+
+  const handleLogout = async () => {
+  await fetch("http://localhost:5050/auth/logout", {
+    method: "POST",
+    credentials: "include",
+  });
+  navigate("/");
+};
 
   return (
     <nav className="bg-blue-600 text-white p-4 flex justify-between items-center">
